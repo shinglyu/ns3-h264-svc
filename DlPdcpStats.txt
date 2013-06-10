@@ -1,0 +1,2 @@
+% start	end	CellId	IMSI	RNTI	LCID	nTxPDUs	TxBytes	nRxPDUs	RxBytes	delay	stdDev	min	max	PduSize	stdDev	min	max
+0	2	12	17	1	1	1000	50000	1000	50000	0.00345842	0.000288637	0.00300001	0.004	50	0	50	50	
