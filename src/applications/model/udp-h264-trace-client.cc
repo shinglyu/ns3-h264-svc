@@ -37,10 +37,11 @@
 
 namespace ns3 {
 
-NS_LOG_COMPONENT_DEFINE ("UdpTraceClient");
-NS_OBJECT_ENSURE_REGISTERED (UdpTraceClient);
+NS_LOG_COMPONENT_DEFINE ("UdpH264TraceClient");
+NS_OBJECT_ENSURE_REGISTERED (UdpH264TraceClient);
 
-struct UdpTraceClient::TraceEntry UdpTraceClient::g_defaultEntries[] = {
+/*
+struct UdpH264TraceClient::TraceEntry UdpH264TraceClient::g_defaultEntries[] = {
   { 0, 534, 'I'},
   { 40, 1542, 'P'},
   { 120, 134, 'B'},
@@ -52,39 +53,40 @@ struct UdpTraceClient::TraceEntry UdpTraceClient::g_defaultEntries[] = {
   { 280, 421, 'B'},
   { 320, 587, 'B'}
 };
+*/
 
 TypeId
-UdpTraceClient::GetTypeId (void)
+UdpH264TraceClient::GetTypeId (void)
 {
-  static TypeId tid = TypeId ("ns3::UdpTraceClient")
+  static TypeId tid = TypeId ("ns3::UdpH264TraceClient")
     .SetParent<Application> ()
-    .AddConstructor<UdpTraceClient> ()
+    .AddConstructor<UdpH264TraceClient> ()
     .AddAttribute ("RemoteAddress",
                    "The destination Address of the outbound packets",
                    AddressValue (),
-                   MakeAddressAccessor (&UdpTraceClient::m_peerAddress),
+                   MakeAddressAccessor (&UdpH264TraceClient::m_peerAddress),
                    MakeAddressChecker ())
     .AddAttribute ("RemotePort",
                    "The destination port of the outbound packets",
                    UintegerValue (100),
-                   MakeUintegerAccessor (&UdpTraceClient::m_peerPort),
+                   MakeUintegerAccessor (&UdpH264TraceClient::m_peerPort),
                    MakeUintegerChecker<uint16_t> ())
     .AddAttribute ("MaxPacketSize",
                    "The maximum size of a packet.",
                    UintegerValue (1024),
-                   MakeUintegerAccessor (&UdpTraceClient::m_maxPacketSize),
+                   MakeUintegerAccessor (&UdpH264TraceClient::m_maxPacketSize),
                    MakeUintegerChecker<uint32_t> ())
     .AddAttribute ("TraceFilename",
                    "Name of file to load a trace from. By default, uses a hardcoded trace.",
                    StringValue (""),
-                   MakeStringAccessor (&UdpTraceClient::SetTraceFile),
+                   MakeStringAccessor (&UdpH264TraceClient::SetTraceFile),
                    MakeStringChecker ())
 
   ;
   return tid;
 }
 
-UdpTraceClient::UdpTraceClient ()
+UdpH264TraceClient::UdpH264TraceClient ()
 {
   NS_LOG_FUNCTION (this);
   m_sent = 0;
@@ -93,7 +95,7 @@ UdpTraceClient::UdpTraceClient ()
   m_maxPacketSize = 1400;
 }
 
-UdpTraceClient::UdpTraceClient (Ipv4Address ip, uint16_t port,
+UdpH264TraceClient::UdpH264TraceClient (Ipv4Address ip, uint16_t port,
                                 char *traceFile)
 {
   NS_LOG_FUNCTION (this);
@@ -110,14 +112,14 @@ UdpTraceClient::UdpTraceClient (Ipv4Address ip, uint16_t port,
     }
 }
 
-UdpTraceClient::~UdpTraceClient ()
+UdpH264TraceClient::~UdpH264TraceClient ()
 {
   NS_LOG_FUNCTION (this);
   m_entries.clear ();
 }
 
 void
-UdpTraceClient::SetRemote (Address ip, uint16_t port)
+UdpH264TraceClient::SetRemote (Address ip, uint16_t port)
 {
   NS_LOG_FUNCTION (this << ip << port);
   m_entries.clear ();
@@ -126,7 +128,7 @@ UdpTraceClient::SetRemote (Address ip, uint16_t port)
 }
 
 void
-UdpTraceClient::SetRemote (Ipv4Address ip, uint16_t port)
+UdpH264TraceClient::SetRemote (Ipv4Address ip, uint16_t port)
 {
   NS_LOG_FUNCTION (this << ip << port);
   m_entries.clear ();
@@ -135,7 +137,7 @@ UdpTraceClient::SetRemote (Ipv4Address ip, uint16_t port)
 }
 
 void
-UdpTraceClient::SetRemote (Ipv6Address ip, uint16_t port)
+UdpH264TraceClient::SetRemote (Ipv6Address ip, uint16_t port)
 {
   NS_LOG_FUNCTION (this << ip << port);
   m_entries.clear ();
@@ -144,12 +146,12 @@ UdpTraceClient::SetRemote (Ipv6Address ip, uint16_t port)
 }
 
 void
-UdpTraceClient::SetTraceFile (std::string traceFile)
+UdpH264TraceClient::SetTraceFile (std::string traceFile)
 {
   NS_LOG_FUNCTION (this << traceFile);
   if (traceFile == "")
     {
-      NS_LOG_FUNCTION (this << "Trace file not specified.");
+      NS_LOG_FUNCTION (this << "[ERROR] Trace file not specified.");
       //LoadDefaultTrace ();
     }
   else
@@ -159,14 +161,14 @@ UdpTraceClient::SetTraceFile (std::string traceFile)
 }
 
 void
-UdpTraceClient::SetMaxPacketSize (uint16_t maxPacketSize)
+UdpH264TraceClient::SetMaxPacketSize (uint16_t maxPacketSize)
 {
   NS_LOG_FUNCTION (this << maxPacketSize);
   m_maxPacketSize = maxPacketSize;
 }
 
 
-uint16_t UdpTraceClient::GetMaxPacketSize (void)
+uint16_t UdpH264TraceClient::GetMaxPacketSize (void)
 {
   NS_LOG_FUNCTION (this);
   return m_maxPacketSize;
@@ -174,30 +176,39 @@ uint16_t UdpTraceClient::GetMaxPacketSize (void)
 
 
 void
-UdpTraceClient::DoDispose (void)
+UdpH264TraceClient::DoDispose (void)
 {
   NS_LOG_FUNCTION (this);
   Application::DoDispose ();
 }
 
 void
-UdpTraceClient::LoadTrace (std::string filename)
+UdpH264TraceClient::LoadTrace (std::string filename)
 {
   NS_LOG_FUNCTION (this << filename);
-  uint32_t time, index, prevTime = 0;
+  double txTime;
   uint16_t size;
-  char frameType;
+  uint32_t lid, tid, qid, frameNo;
   TraceEntry entry;
   std::ifstream ifTraceFile;
   ifTraceFile.open (filename.c_str (), std::ifstream::in);
   m_entries.clear ();
   if (!ifTraceFile.good ())
     {
-      LoadDefaultTrace ();
+      NS_LOG_FUNCTION (this << "[ERROR] Bad trace file: " << filename);
+      //LoadDefaultTrace ();
     }
   while (ifTraceFile.good ())
     {
-      ifTraceFile >> index >> frameType >> time >> size;
+      ifTraceFile >> txTime >> size >> lid >> tid >> qid >> frameNo;
+      /*
+      Input格式
+         <Transmit Time>\t<Frame Size>\t<Lid>\t<Tid>\t<Qid>\t<Frame Number>
+
+      Otput格式
+         <Receive Time>\t<Frame Size>\t<Lid>\t<Tid>\t<Qid>\t<Frame Number>
+      */
+      /*
       if (frameType == 'B')
         {
           entry.timeToSend = 0;
@@ -207,16 +218,22 @@ UdpTraceClient::LoadTrace (std::string filename)
           entry.timeToSend = time - prevTime;
           prevTime = time;
         }
-      entry.packetSize = size;
-      entry.frameType = frameType;
+      */
+      entry.txTime = txTime;
+      entry.size = size;
+      entry.lid = lid;
+      entry.tid = tid;
+      entry.qid = qid;
+      entry.frameNo = frameNo;
       m_entries.push_back (entry);
     }
   ifTraceFile.close ();
   m_currentEntry = 0;
 }
 
+/*
 void
-UdpTraceClient::LoadDefaultTrace (void)
+UdpH264TraceClient::LoadDefaultTrace (void)
 {
   NS_LOG_FUNCTION (this);
   uint32_t prevTime = 0;
@@ -237,9 +254,9 @@ UdpTraceClient::LoadDefaultTrace (void)
     }
   m_currentEntry = 0;
 }
-
+*/
 void
-UdpTraceClient::StartApplication (void)
+UdpH264TraceClient::StartApplication (void)
 {
   NS_LOG_FUNCTION (this);
 
@@ -259,18 +276,18 @@ UdpTraceClient::StartApplication (void)
         }
     }
   m_socket->SetRecvCallback (MakeNullCallback<void, Ptr<Socket> > ());
-  m_sendEvent = Simulator::Schedule (Seconds (0.0), &UdpTraceClient::Send, this);
+  m_sendEvent = Simulator::Schedule (Seconds (0.0), &UdpH264TraceClient::Send, this);
 }
 
 void
-UdpTraceClient::StopApplication ()
+UdpH264TraceClient::StopApplication ()
 {
   NS_LOG_FUNCTION (this);
   Simulator::Cancel (m_sendEvent);
 }
 
 void
-UdpTraceClient::SendPacket (uint32_t size)
+UdpH264TraceClient::SendPacket (uint32_t size)
 {
   NS_LOG_FUNCTION (this << size);
   Ptr<Packet> p;
@@ -316,7 +333,7 @@ UdpTraceClient::SendPacket (uint32_t size)
 }
 
 void
-UdpTraceClient::Send (void)
+UdpH264TraceClient::Send (void)
 {
   NS_LOG_FUNCTION (this);
 
@@ -338,7 +355,7 @@ UdpTraceClient::Send (void)
       entry = &m_entries[m_currentEntry];
     }
   while (entry->timeToSend == 0);
-  m_sendEvent = Simulator::Schedule (MilliSeconds (entry->timeToSend), &UdpTraceClient::Send, this);
+  m_sendEvent = Simulator::Schedule (MilliSeconds (entry->timeToSend), &UdpH264TraceClient::Send, this);
 }
 
 } // Namespace ns3
