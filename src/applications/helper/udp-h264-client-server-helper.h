@@ -17,8 +17,8 @@
  *
  * Author: Mohamed Amine Ismail <amine.ismail@sophia.inria.fr>
  */
-#ifndef UDP_CLIENT_SERVER_HELPER_H
-#define UDP_CLIENT_SERVER_HELPER_H
+#ifndef UDP_H264_CLIENT_SERVER_HELPER_H
+#define UDP_H264_CLIENT_SERVER_HELPER_H
 
 #include <stdint.h>
 #include "ns3/application-container.h"
@@ -29,7 +29,7 @@
 #include "ns3/udp-client.h"
 namespace ns3 {
 /**
- * \brief Create a server application which waits for input udp packets
+ * \brief Create a server application which waits for input H264_udp packets
  *        and uses the information carried into their payload to compute
  *        delay and to determine if some packets are lost.
  */
@@ -95,4 +95,4 @@ private:
 
 } // namespace ns3
 
-#endif /* UDP_CLIENT_SERVER_H */
+#endif /* UDP_H264_CLIENT_SERVER_H */

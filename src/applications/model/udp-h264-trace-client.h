@@ -19,8 +19,8 @@
  *                              <amine.ismail@udcast.com>
  */
 
-#ifndef UDP_TRACE_CLIENT_H
-#define UDP_TRACE_CLIENT_H
+#ifndef UDP_H264_TRACE_CLIENT_H
+#define UDP_H264_TRACE_CLIENT_H
 
 #include "ns3/application.h"
 #include "ns3/event-id.h"
@@ -138,4 +138,4 @@ private:
 
 } // namespace ns3
 
-#endif /* UDP_TRACE_CLIENT_H */
+#endif /* UDP_H264_TRACE_CLIENT_H */
