@@ -1,0 +1,164 @@
+Waf: Entering directory `/home/a108210/Dropbox/0.work/0.Wireless_Access_Network/NS3/ns-allinone-3.16/ns-3.16/build'
+[1221/1974] cxx: src/applications/model/udp-h264-trace-client.cc -> build/src/applications/model/udp-h264-trace-client.cc.1.o
+[1227/1974] cxx: build/src/applications/bindings/ns3module.cc -> build/src/applications/bindings/ns3module.cc.7.o
+../src/applications/model/udp-h264-trace-client.cc: In member function ‘void ns3::UdpH264TraceClient::Send()’:
+../src/applications/model/udp-h264-trace-client.cc:346:34: error: ‘struct ns3::UdpH264TraceClient::TraceEntry’ has no member named ‘packetSize’
+../src/applications/model/udp-h264-trace-client.cc:351:36: error: ‘struct ns3::UdpH264TraceClient::TraceEntry’ has no member named ‘packetSize’
+In file included from src/applications/bindings/ns3module.cc:1:0:
+src/applications/bindings/ns3module.h:3926:5: error: ‘UdpTraceClient’ in namespace ‘ns3’ does not name a type
+src/applications/bindings/ns3module.h:3935:1: error: expected class-name before ‘{’ token
+src/applications/bindings/ns3module.h:3938:59: error: expected ‘)’ before ‘const’
+src/applications/bindings/ns3module.h: In constructor ‘PyNs3UdpTraceClient__PythonHelper::PyNs3UdpTraceClient__PythonHelper()’:
+src/applications/bindings/ns3module.h:3943:30: error: expected class-name before ‘(’ token
+src/applications/bindings/ns3module.h:3943:30: error: expected ‘{’ before ‘(’ token
+src/applications/bindings/ns3module.h: In constructor ‘PyNs3UdpTraceClient__PythonHelper::PyNs3UdpTraceClient__PythonHelper(ns3::Ipv4Address, uint16_t, char*)’:
+src/applications/bindings/ns3module.h:3947:30: error: expected class-name before ‘(’ token
+src/applications/bindings/ns3module.h:3947:30: error: expected ‘{’ before ‘(’ token
+src/applications/bindings/ns3module.h: In member function ‘void PyNs3UdpTraceClient__PythonHelper::NotifyConstructionCompleted__parent_caller()’:
+src/applications/bindings/ns3module.h:3966:52: error: cannot call member function ‘virtual void ns3::ObjectBase::NotifyConstructionCompleted()’ without object
+src/applications/bindings/ns3module.h: In member function ‘void PyNs3UdpTraceClient__PythonHelper::NotifyNewAggregate__parent_caller()’:
+src/applications/bindings/ns3module.h:3970:39: error: cannot call member function ‘virtual void ns3::Object::NotifyNewAggregate()’ without object
+src/applications/bindings/ns3module.h: In member function ‘void PyNs3UdpTraceClient__PythonHelper::DoStart__parent_caller()’:
+src/applications/bindings/ns3module.h:3974:33: error: cannot call member function ‘virtual void ns3::Application::DoStart()’ without object
+src/applications/bindings/ns3module.h: In member function ‘void PyNs3UdpTraceClient__PythonHelper::DoDispose__parent_caller()’:
+src/applications/bindings/ns3module.h:3978:12: error: ‘ns3::UdpTraceClient’ has not been declared
+src/applications/bindings/ns3module.h: In static member function ‘static ns3::TypeId PyNs3UdpTraceClient__PythonHelper::GetTypeId()’:
+src/applications/bindings/ns3module.h:3997:21: error: ‘UdpTraceClient’ is not a member of ‘ns3’
+src/applications/bindings/ns3module.h:3997:21: error: ‘UdpTraceClient’ is not a member of ‘ns3’
+src/applications/bindings/ns3module.h:3997:44: error: no matching function for call to ‘ns3::TypeId::SetParent()’
+src/applications/bindings/ns3module.h:3997:44: note: candidate is:
+In file included from ./ns3/object-base.h:23:0,
+                 from ./ns3/object.h:29,
+                 from ./ns3/application.h:26,
+                 from ./ns3/bulk-send-application.h:25,
+                 from ./ns3/applications-module.h:10,
+                 from src/applications/bindings/ns3module.h:60,
+                 from src/applications/bindings/ns3module.cc:1:
+./ns3/type-id.h:381:1: note: template<class T> ns3::TypeId ns3::TypeId::SetParent()
+./ns3/type-id.h:381:1: note:   template argument deduction/substitution failed:
+In file included from src/applications/bindings/ns3module.cc:1:0:
+src/applications/bindings/ns3module.h:3997:44: error: template argument 1 is invalid
+src/applications/bindings/ns3module.cc: In static member function ‘static PyObject* PyNs3UdpTraceClient__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3UdpTraceClient*)’:
+src/applications/bindings/ns3module.cc:13116:106: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In static member function ‘static PyObject* PyNs3UdpTraceClient__PythonHelper::_wrap_NotifyNewAggregate(PyNs3UdpTraceClient*)’:
+src/applications/bindings/ns3module.cc:13132:106: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In static member function ‘static PyObject* PyNs3UdpTraceClient__PythonHelper::_wrap_DoStart(PyNs3UdpTraceClient*)’:
+src/applications/bindings/ns3module.cc:13148:106: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In static member function ‘static PyObject* PyNs3UdpTraceClient__PythonHelper::_wrap_DoDispose(PyNs3UdpTraceClient*)’:
+src/applications/bindings/ns3module.cc:13164:106: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In member function ‘virtual void PyNs3UdpTraceClient__PythonHelper::DoDispose()’:
+src/applications/bindings/ns3module.cc:13181:5: error: ‘UdpTraceClient’ is not a member of ‘ns3’
+src/applications/bindings/ns3module.cc:13181:26: error: ‘self_obj_before’ was not declared in this scope
+src/applications/bindings/ns3module.cc:13187:14: error: ‘ns3::UdpTraceClient’ has not been declared
+src/applications/bindings/ns3module.cc:13193:75: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13194:57: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13194:64: error: ‘UdpTraceClient’ is not a member of ‘ns3’
+src/applications/bindings/ns3module.cc:13194:84: error: expected primary-expression before ‘)’ token
+src/applications/bindings/ns3module.cc:13194:86: error: expected ‘;’ before ‘this’
+src/applications/bindings/ns3module.cc:13198:61: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13207:61: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13214:57: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In member function ‘virtual void PyNs3UdpTraceClient__PythonHelper::StartApplication()’:
+src/applications/bindings/ns3module.cc:13226:5: error: ‘UdpTraceClient’ is not a member of ‘ns3’
+src/applications/bindings/ns3module.cc:13226:26: error: ‘self_obj_before’ was not declared in this scope
+src/applications/bindings/ns3module.cc:13237:75: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13238:57: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13238:64: error: ‘UdpTraceClient’ is not a member of ‘ns3’
+src/applications/bindings/ns3module.cc:13238:84: error: expected primary-expression before ‘)’ token
+src/applications/bindings/ns3module.cc:13238:86: error: expected ‘;’ before ‘this’
+src/applications/bindings/ns3module.cc:13242:61: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13251:61: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13258:57: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In member function ‘virtual void PyNs3UdpTraceClient__PythonHelper::StopApplication()’:
+src/applications/bindings/ns3module.cc:13270:5: error: ‘UdpTraceClient’ is not a member of ‘ns3’
+src/applications/bindings/ns3module.cc:13270:26: error: ‘self_obj_before’ was not declared in this scope
+src/applications/bindings/ns3module.cc:13281:75: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13282:57: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13282:64: error: ‘UdpTraceClient’ is not a member of ‘ns3’
+src/applications/bindings/ns3module.cc:13282:84: error: expected primary-expression before ‘)’ token
+src/applications/bindings/ns3module.cc:13282:86: error: expected ‘;’ before ‘this’
+src/applications/bindings/ns3module.cc:13286:61: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13295:61: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13302:57: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In member function ‘virtual void PyNs3UdpTraceClient__PythonHelper::DoStart()’:
+src/applications/bindings/ns3module.cc:13320:35: error: cannot call member function ‘virtual void ns3::Application::DoStart()’ without object
+src/applications/bindings/ns3module.cc: In member function ‘virtual ns3::TypeId PyNs3UdpTraceClient__PythonHelper::GetInstanceTypeId() const’:
+src/applications/bindings/ns3module.cc:13369:47: error: cannot call member function ‘virtual ns3::TypeId ns3::Object::GetInstanceTypeId() const’ without object
+src/applications/bindings/ns3module.cc:13380:47: error: cannot call member function ‘virtual ns3::TypeId ns3::Object::GetInstanceTypeId() const’ without object
+src/applications/bindings/ns3module.cc:13390:47: error: cannot call member function ‘virtual ns3::TypeId ns3::Object::GetInstanceTypeId() const’ without object
+src/applications/bindings/ns3module.cc: In member function ‘virtual void PyNs3UdpTraceClient__PythonHelper::NotifyNewAggregate()’:
+src/applications/bindings/ns3module.cc:13412:41: error: cannot call member function ‘virtual void ns3::Object::NotifyNewAggregate()’ without object
+src/applications/bindings/ns3module.cc: In member function ‘virtual void PyNs3UdpTraceClient__PythonHelper::NotifyConstructionCompleted()’:
+src/applications/bindings/ns3module.cc:13457:54: error: cannot call member function ‘virtual void ns3::ObjectBase::NotifyConstructionCompleted()’ without object
+src/applications/bindings/ns3module.cc: In function ‘int _wrap_PyNs3UdpTraceClient__tp_init__0(PyNs3UdpTraceClient*, PyObject*, PyObject*, PyObject**)’:
+src/applications/bindings/ns3module.cc:13509:15: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13509:92: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13510:15: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13512:53: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13513:38: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13516:15: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13516:25: error: expected type-specifier
+src/applications/bindings/ns3module.cc:13516:25: error: expected ‘;’
+src/applications/bindings/ns3module.cc:13517:15: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13519:38: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In function ‘int _wrap_PyNs3UdpTraceClient__tp_init__1(PyNs3UdpTraceClient*, PyObject*, PyObject*, PyObject**)’:
+src/applications/bindings/ns3module.cc:13540:15: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13541:15: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13543:53: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13544:38: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13547:15: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13547:25: error: expected type-specifier
+src/applications/bindings/ns3module.cc:13547:25: error: expected ‘;’
+src/applications/bindings/ns3module.cc:13548:15: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13550:38: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In function ‘int _wrap_PyNs3UdpTraceClient__tp_init__2(PyNs3UdpTraceClient*, PyObject*, PyObject*, PyObject**)’:
+src/applications/bindings/ns3module.cc:13584:15: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13585:15: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13587:53: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13588:38: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13591:15: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13591:25: error: expected type-specifier
+src/applications/bindings/ns3module.cc:13591:25: error: expected ‘;’
+src/applications/bindings/ns3module.cc:13592:15: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13594:38: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In function ‘PyObject* _wrap_PyNs3UdpTraceClient_GetMaxPacketSize(PyNs3UdpTraceClient*)’:
+src/applications/bindings/ns3module.cc:13638:20: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In function ‘PyObject* _wrap_PyNs3UdpTraceClient_GetTypeId()’:
+src/applications/bindings/ns3module.cc:13650:31: error: ‘ns3::UdpTraceClient’ has not been declared
+src/applications/bindings/ns3module.cc: In function ‘PyObject* _wrap_PyNs3UdpTraceClient_SetRemote__0(PyNs3UdpTraceClient*, PyObject*, PyObject*, PyObject**)’:
+src/applications/bindings/ns3module.cc:13716:11: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In function ‘PyObject* _wrap_PyNs3UdpTraceClient_SetRemote__1(PyNs3UdpTraceClient*, PyObject*, PyObject*, PyObject**)’:
+src/applications/bindings/ns3module.cc:13749:11: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In function ‘PyObject* _wrap_PyNs3UdpTraceClient_SetRemote__2(PyNs3UdpTraceClient*, PyObject*, PyObject*, PyObject**)’:
+src/applications/bindings/ns3module.cc:13782:11: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In function ‘PyObject* _wrap_PyNs3UdpTraceClient_SetMaxPacketSize(PyNs3UdpTraceClient*, PyObject*, PyObject*)’:
+src/applications/bindings/ns3module.cc:13835:11: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In function ‘PyObject* _wrap_PyNs3UdpTraceClient_SetTraceFile(PyNs3UdpTraceClient*, PyObject*, PyObject*)’:
+src/applications/bindings/ns3module.cc:13853:11: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In function ‘PyObject* _wrap_PyNs3UdpTraceClient__copy__(PyNs3UdpTraceClient*)’:
+src/applications/bindings/ns3module.cc:13866:14: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13866:24: error: expected type-specifier
+src/applications/bindings/ns3module.cc:13866:24: error: expected ‘;’
+src/applications/bindings/ns3module.cc:13869:56: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In function ‘void PyNs3UdpTraceClient__tp_clear(PyNs3UdpTraceClient*)’:
+src/applications/bindings/ns3module.cc:13891:15: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13892:5: error: ‘UdpTraceClient’ is not a member of ‘ns3’
+src/applications/bindings/ns3module.cc:13892:26: error: ‘tmp’ was not declared in this scope
+src/applications/bindings/ns3module.cc:13892:38: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13893:11: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In function ‘int PyNs3UdpTraceClient__tp_traverse(PyNs3UdpTraceClient*, visitproc, void*)’:
+src/applications/bindings/ns3module.cc:13904:15: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13904:36: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc:13904:110: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In function ‘void _wrap_PyNs3UdpTraceClient__tp_dealloc(PyNs3UdpTraceClient*)’:
+src/applications/bindings/ns3module.cc:13915:80: error: ‘struct PyNs3UdpTraceClient’ has no member named ‘obj’
+src/applications/bindings/ns3module.cc: In function ‘void initapplications()’:
+src/applications/bindings/ns3module.cc:18441:103: error: ‘UdpTraceClient’ is not a member of ‘ns3’
+Waf: Leaving directory `/home/a108210/Dropbox/0.work/0.Wireless_Access_Network/NS3/ns-allinone-3.16/ns-3.16/build'
+Build failed
+ -> task in 'ns3-applications' failed (exit status 1): 
+	{task 52368528: cxx udp-h264-trace-client.cc -> udp-h264-trace-client.cc.1.o}
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-Wno-error=deprecated-declarations', '-fstrict-aliasing', '-Wstrict-aliasing', '-fPIC', '-pthread', '-Ibuild', '-I.', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_PACKET_H=1', '-DHAVE_DL=1', '-DHAVE_IF_TUN_H=1', '../src/applications/model/udp-h264-trace-client.cc', '-c', '-o', 'src/applications/model/udp-h264-trace-client.cc.1.o']
+ -> task in 'ns3module_applications' failed (exit status 1): 
+	{task 53577424: cxx ns3module.cc -> ns3module.cc.7.o}
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Werror', '-Wno-error=deprecated-declarations', '-fstrict-aliasing', '-Wstrict-aliasing', '-fPIC', '-pthread', '-fno-strict-aliasing', '-fwrapv', '-fstack-protector', '-fno-strict-aliasing', '-fvisibility=hidden', '-Wno-array-bounds', '-pthread', '-Ibuild', '-I.', '-Ibuild/src/applications/bindings', '-Isrc/applications/bindings', '-I/usr/include/python2.7', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_PACKET_H=1', '-DHAVE_DL=1', '-DHAVE_IF_TUN_H=1', '-DNS_DEPRECATED=', '-DNS3_DEPRECATED_H', '-DNDEBUG', 'src/applications/bindings/ns3module.cc', '-c', '-o', 'src/applications/bindings/ns3module.cc.7.o']

@@ -28,7 +28,6 @@
 #include "ns3/csma-module.h"
 #include "ns3/applications-module.h"
 #include "ns3/internet-module.h"
-//#include "ns3/udp-h264-client-server.h"
 
 using namespace ns3;
 
@@ -104,7 +103,7 @@ main (int argc, char *argv[])
 // node one.
 //
   uint32_t MaxPacketSize = 1472;  // Back off 20 (IP) + 8 (UDP) bytes from MTU
-  UdpTraceClientHelper client (serverAddress, port,"./ns3send.txt");
+  UdpTraceClientHelper client (serverAddress, port,"");
   client.SetAttribute ("MaxPacketSize", UintegerValue (MaxPacketSize));
   apps = client.Install (n.Get (0));
   apps.Start (Seconds (2.0));

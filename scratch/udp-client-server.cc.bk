@@ -25,14 +25,14 @@
 
 #include <fstream>
 #include "ns3/core-module.h"
+#include "ns3/core-module.h"
 #include "ns3/csma-module.h"
 #include "ns3/applications-module.h"
 #include "ns3/internet-module.h"
-//#include "ns3/udp-h264-client-server.h"
 
 using namespace ns3;
 
-NS_LOG_COMPONENT_DEFINE ("UdpTraceClientServerExample");
+NS_LOG_COMPONENT_DEFINE ("UdpClientServerExample");
 
 int
 main (int argc, char *argv[])
@@ -40,7 +40,7 @@ main (int argc, char *argv[])
 //
 // Enable logging for UdpClient and
 //
-  LogComponentEnable ("UdpTraceClient", LOG_LEVEL_INFO);
+  LogComponentEnable ("UdpClient", LOG_LEVEL_INFO);
   LogComponentEnable ("UdpServer", LOG_LEVEL_INFO);
 
   bool useV6 = false;
@@ -67,7 +67,7 @@ main (int argc, char *argv[])
   CsmaHelper csma;
   csma.SetChannelAttribute ("DataRate", DataRateValue (DataRate (5000000)));
   csma.SetChannelAttribute ("Delay", TimeValue (MilliSeconds (2)));
-  csma.SetDeviceAttribute ("Mtu", UintegerValue (1500));
+  csma.SetDeviceAttribute ("Mtu", UintegerValue (1400));
   NetDeviceContainer d = csma.Install (n);
 
 //
@@ -100,12 +100,16 @@ main (int argc, char *argv[])
   apps.Stop (Seconds (10.0));
 
 //
-// Create one UdpTraceClient application to send UDP datagrams from node zero to
+// Create one UdpClient application to send UDP datagrams from node zero to
 // node one.
 //
-  uint32_t MaxPacketSize = 1472;  // Back off 20 (IP) + 8 (UDP) bytes from MTU
-  UdpTraceClientHelper client (serverAddress, port,"./ns3send.txt");
-  client.SetAttribute ("MaxPacketSize", UintegerValue (MaxPacketSize));
+  uint32_t MaxPacketSize = 1024;
+  Time interPacketInterval = Seconds (0.05);
+  uint32_t maxPacketCount = 320;
+  UdpClientHelper client (serverAddress, port);
+  client.SetAttribute ("MaxPackets", UintegerValue (maxPacketCount));
+  client.SetAttribute ("Interval", TimeValue (interPacketInterval));
+  client.SetAttribute ("PacketSize", UintegerValue (MaxPacketSize));
   apps = client.Install (n.Get (0));
   apps.Start (Seconds (2.0));
   apps.Stop (Seconds (10.0));

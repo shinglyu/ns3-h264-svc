@@ -30,7 +30,8 @@
 #include "ns3/uinteger.h"
 #include "ns3/string.h"
 #include "seq-ts-header.h"
-#include "udp-trace-client.h"
+//#include "udp-trace-client.h"
+#include "udp-h264-trace-client.h"
 #include <cstdlib>
 #include <cstdio>
 #include <fstream>
@@ -354,8 +355,8 @@ UdpH264TraceClient::Send (void)
       m_currentEntry %= m_entries.size ();
       entry = &m_entries[m_currentEntry];
     }
-  while (entry->timeToSend == 0);
-  m_sendEvent = Simulator::Schedule (MilliSeconds (entry->timeToSend), &UdpH264TraceClient::Send, this);
+  while (entry->txTime == 0);
+  m_sendEvent = Simulator::Schedule (MilliSeconds (entry->txTime), &UdpH264TraceClient::Send, this);
 }
 
 } // Namespace ns3

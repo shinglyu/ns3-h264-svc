@@ -14,6 +14,7 @@ def build(bld):
         'model/udp-server.cc',
         'model/seq-ts-header.cc',
         'model/udp-trace-client.cc',
+        'model/udp-h264-trace-client.cc',
         'model/packet-loss-counter.cc',
         'model/udp-echo-client.cc',
         'model/udp-echo-server.cc',
@@ -23,6 +24,7 @@ def build(bld):
         'helper/packet-sink-helper.cc',
         'helper/ping6-helper.cc',
         'helper/udp-client-server-helper.cc',
+        'helper/udp-h264-client-server-helper.cc',
         'helper/udp-echo-helper.cc',
         'helper/v4ping-helper.cc',
         ]
@@ -46,6 +48,7 @@ def build(bld):
         'model/udp-server.h',
         'model/seq-ts-header.h',
         'model/udp-trace-client.h',
+        'model/udp-h264-trace-client.h',
         'model/packet-loss-counter.h',
         'model/udp-echo-client.h',
         'model/udp-echo-server.h',
@@ -55,6 +58,7 @@ def build(bld):
         'helper/packet-sink-helper.h',
         'helper/ping6-helper.h',
         'helper/udp-client-server-helper.h',
+        'helper/udp-h264-client-server-helper.h',
         'helper/udp-echo-helper.h',
         'helper/v4ping-helper.h',
         ]
