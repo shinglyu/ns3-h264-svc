@@ -93,7 +93,8 @@ main (int argc, char *argv[])
 // Create one udpServer applications on node one.
 //
   uint16_t port = 4000;
-  UdpServerHelper server (port);
+  UdpH264ServerHelper server (port);
+  //UdpServerHelper server (port);
   ApplicationContainer apps = server.Install (n.Get (1));
   apps.Start (Seconds (1.0));
   apps.Stop (Seconds (10.0));
@@ -103,7 +104,8 @@ main (int argc, char *argv[])
 // node one.
 //
   uint32_t MaxPacketSize = 1472;  // Back off 20 (IP) + 8 (UDP) bytes from MTU
-  UdpTraceClientHelper client (serverAddress, port,"");
+  UdpTraceClientHelper client (serverAddress, port, "./ns3send.txt");
+  //UdpH264TraceClientHelper client (serverAddress, port,"./ns3send.txt");
   client.SetAttribute ("MaxPacketSize", UintegerValue (MaxPacketSize));
   apps = client.Install (n.Get (0));
   apps.Start (Seconds (2.0));

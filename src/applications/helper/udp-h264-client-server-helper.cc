@@ -20,6 +20,7 @@
 //#include "udp-client-server-helper.h"
 #include "udp-h264-client-server-helper.h"
 #include "ns3/udp-server.h"
+#include "ns3/udp-h264-server.h"
 #include "ns3/udp-client.h"
 //#include "ns3/udp-trace-client.h"
 #include "ns3/udp-h264-trace-client.h"
@@ -27,6 +28,44 @@
 #include "ns3/string.h"
 
 namespace ns3 {
+
+UdpH264ServerHelper::UdpH264ServerHelper ()
+{
+}
+
+UdpH264ServerHelper::UdpH264ServerHelper (uint16_t port)
+{
+  m_factory.SetTypeId (UdpH264Server::GetTypeId ());
+  SetAttribute ("Port", UintegerValue (port));
+}
+
+void
+UdpH264ServerHelper::SetAttribute (std::string name, const AttributeValue &value)
+{
+  m_factory.Set (name, value);
+}
+
+ApplicationContainer
+UdpH264ServerHelper::Install (NodeContainer c)
+{
+  ApplicationContainer apps;
+  for (NodeContainer::Iterator i = c.Begin (); i != c.End (); ++i)
+    {
+      Ptr<Node> node = *i;
+
+      m_server = m_factory.Create<UdpH264Server> ();
+      node->AddApplication (m_server);
+      apps.Add (m_server);
+
+    }
+  return apps;
+}
+
+Ptr<UdpH264Server>
+UdpH264ServerHelper::GetServer (void)
+{
+  return m_server;
+}
 
 UdpH264TraceClientHelper::UdpH264TraceClientHelper ()
 {

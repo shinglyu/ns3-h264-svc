@@ -152,7 +152,7 @@ UdpH264TraceClient::SetTraceFile (std::string traceFile)
   NS_LOG_FUNCTION (this << traceFile);
   if (traceFile == "")
     {
-      NS_LOG_FUNCTION (this << "[ERROR] Trace file not specified.");
+      //NS_LOG_FUNCTION (this << "[ERROR] Trace file not specified.");
       //LoadDefaultTrace ();
     }
   else
@@ -196,12 +196,13 @@ UdpH264TraceClient::LoadTrace (std::string filename)
   m_entries.clear ();
   if (!ifTraceFile.good ())
     {
-      NS_LOG_FUNCTION (this << "[ERROR] Bad trace file: " << filename);
+      //NS_LOG_FUNCTION (this << "[ERROR] Bad trace file: " << filename);
       //LoadDefaultTrace ();
     }
   while (ifTraceFile.good ())
     {
       ifTraceFile >> txTime >> size >> lid >> tid >> qid >> frameNo;
+      NS_LOG_INFO ("Read trace entry:" << txTime << size << lid << tid << qid << frameNo);
       /*
       Input格式
          <Transmit Time>\t<Frame Size>\t<Lid>\t<Tid>\t<Qid>\t<Frame Number>
@@ -301,7 +302,7 @@ UdpH264TraceClient::SendPacket (uint32_t size)
     {
       packetSize = 0;
     }
-  p = Create<Packet> (packetSize);
+  p = Create<Packet> (packetSize);//TODO: add payload here, or use header
   SeqTsHeader seqTs;
   seqTs.SetSeq (m_sent);
   p->AddHeader (seqTs);
