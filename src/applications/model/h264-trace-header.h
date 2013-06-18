@@ -57,13 +57,13 @@ public:
    * \return the sequence number
    */
   //TraceEntry GetTraceEntry (void) const;
-  double GetTxTime(void) const;
+  uint32_t GetTxTime(void) const;
   uint16_t GetSize(void) const;
   uint32_t GetLid(void) const;
   uint32_t GetTid(void) const;
   uint32_t GetQid(void) const;
   uint32_t GetFrameNo(void) const;
-  void SetTxTime(double) ;
+  void SetTxTime(uint32_t) ;
   void SetSize(uint16_t) ;
   void SetLid(uint32_t) ;
   void SetTid(uint32_t) ;
@@ -78,7 +78,7 @@ private:
   virtual void Serialize (Buffer::Iterator start) const;
   virtual uint32_t Deserialize (Buffer::Iterator start);
 
-  double m_txTime;
+  uint32_t m_txTime;
   uint16_t m_size;
   uint32_t m_lid;
   uint32_t m_tid;

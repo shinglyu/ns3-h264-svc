@@ -118,7 +118,7 @@ private:
 
   struct TraceEntry
   {
-     double txTime;
+     uint32_t txTime;
      uint16_t size;
      uint32_t lid;
      uint32_t tid;

@@ -188,7 +188,7 @@ void
 UdpH264TraceClient::LoadTrace (std::string filename)
 {
   NS_LOG_FUNCTION (this << filename);
-  double txTime;
+  uint32_t txTime;
   uint16_t size;
   uint32_t lid, tid, qid, frameNo;
   TraceEntry entry;
