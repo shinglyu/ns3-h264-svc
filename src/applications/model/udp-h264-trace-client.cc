@@ -188,7 +188,7 @@ void
 UdpH264TraceClient::LoadTrace (std::string filename)
 {
   NS_LOG_FUNCTION (this << filename);
-  uint32_t txTime;
+  uint32_t txTime, prevTime = 0;
   uint16_t size;
   uint32_t lid, tid, qid, frameNo;
   TraceEntry entry;
@@ -222,7 +222,8 @@ UdpH264TraceClient::LoadTrace (std::string filename)
           prevTime = time;
         }
       */
-      entry.txTime = txTime;
+      entry.txTime = txTime - prevTime;
+      prevTime = txTime;
       entry.size = size;
       entry.lid = lid;
       entry.tid = tid;
@@ -365,7 +366,7 @@ UdpH264TraceClient::Send (void)
       entry = &m_entries[m_currentEntry];
     }
   while (entry->txTime == 0);
-  m_sendEvent = Simulator::Schedule (MilliSeconds (entry->txTime), &UdpH264TraceClient::Send, this);
+  m_sendEvent = Simulator::Schedule (MicroSeconds (entry->txTime), &UdpH264TraceClient::Send, this);
 }
 
 } // Namespace ns3
