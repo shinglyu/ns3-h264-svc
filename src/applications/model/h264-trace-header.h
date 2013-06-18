@@ -63,12 +63,12 @@ public:
   uint32_t GetTid(void) const;
   uint32_t GetQid(void) const;
   uint32_t GetFrameNo(void) const;
-  void SetTxTime(double) const;
-  void SetSize(uint16_t) const;
-  void SetLid(uint32_t) const;
-  void SetTid(uint32_t) const;
-  void SetQid(uint32_t) const;
-  void SetFrameNo(uint32_t) const;
+  void SetTxTime(double) ;
+  void SetSize(uint16_t) ;
+  void SetLid(uint32_t) ;
+  void SetTid(uint32_t) ;
+  void SetQid(uint32_t) ;
+  void SetFrameNo(uint32_t) ;
 
   static TypeId GetTypeId (void);
 private:
