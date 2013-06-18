@@ -152,7 +152,7 @@ UdpH264TraceClient::SetTraceFile (std::string traceFile)
   NS_LOG_FUNCTION (this << traceFile);
   if (traceFile == "")
     {
-      NS_LOG_FUNCTION (this << "[ERROR] Trace file not specified.");
+      //NS_LOG_FUNCTION (this << "[ERROR] Trace file not specified.");
       //LoadDefaultTrace ();
     }
   else
@@ -196,12 +196,13 @@ UdpH264TraceClient::LoadTrace (std::string filename)
   m_entries.clear ();
   if (!ifTraceFile.good ())
     {
-      NS_LOG_FUNCTION (this << "[ERROR] Bad trace file: " << filename);
+      //NS_LOG_FUNCTION (this << "[ERROR] Bad trace file: " << filename);
       //LoadDefaultTrace ();
     }
   while (ifTraceFile.good ())
     {
       ifTraceFile >> txTime >> size >> lid >> tid >> qid >> frameNo;
+      NS_LOG_INFO ("Read trace entry:" << txTime << size << lid << tid << qid << frameNo);
       /*
       Input格式
          <Transmit Time>\t<Frame Size>\t<Lid>\t<Tid>\t<Qid>\t<Frame Number>
@@ -288,7 +289,7 @@ UdpH264TraceClient::StopApplication ()
 }
 
 void
-UdpH264TraceClient::SendPacket (uint32_t size)
+UdpH264TraceClient::SendPacket (uint32_t size, struct TraceEntry* entry)
 {
   NS_LOG_FUNCTION (this << size);
   Ptr<Packet> p;
@@ -301,10 +302,10 @@ UdpH264TraceClient::SendPacket (uint32_t size)
     {
       packetSize = 0;
     }
-  p = Create<Packet> (packetSize);
-  SeqTsHeader seqTs;
-  seqTs.SetSeq (m_sent);
-  p->AddHeader (seqTs);
+  p = Create<Packet> (packetSize);//TODO: add payload here, or use header
+  H264TraceHeader h264header;
+  h264header.SetTraceEntry(entry)
+  p->AddHeader (h264header);
 
   std::stringstream addressString;
   if (Ipv4Address::IsMatchingType(m_peerAddress) == true)
@@ -343,13 +344,13 @@ UdpH264TraceClient::Send (void)
   struct TraceEntry *entry = &m_entries[m_currentEntry];
   do
     {
-      for (int i = 0; i < entry->packetSize / m_maxPacketSize; i++)
+      for (int i = 0; i < entry->size/ m_maxPacketSize; i++)
         {
-          SendPacket (m_maxPacketSize);
+          SendPacket (m_maxPacketSize, entry);
         }
 
-      uint16_t sizetosend = entry->packetSize % m_maxPacketSize;
-      SendPacket (sizetosend);
+      uint16_t sizetosend = entry->size% m_maxPacketSize;
+      SendPacket (sizetosend, entry);
 
       m_currentEntry++;
       m_currentEntry %= m_entries.size ();

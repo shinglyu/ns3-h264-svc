@@ -17,8 +17,8 @@
  *
  * Author: Mohamed Amine Ismail <amine.ismail@sophia.inria.fr>
  */
-#ifndef UDP_CLIENT_SERVER_HELPER_H
-#define UDP_CLIENT_SERVER_HELPER_H
+#ifndef UDP_H264_CLIENT_SERVER_HELPER_H
+#define UDP_H264_CLIENT_SERVER_HELPER_H
 
 #include <stdint.h>
 #include "ns3/application-container.h"
@@ -26,14 +26,56 @@
 #include "ns3/object-factory.h"
 #include "ns3/ipv4-address.h"
 #include "ns3/udp-server.h"
+#include "ns3/udp-h264-server.h"
 #include "ns3/udp-client.h"
 namespace ns3 {
 /**
- * \brief Create a server application which waits for input udp packets
+ * \brief Create a server application which waits for input H264_udp packets
  *        and uses the information carried into their payload to compute
  *        delay and to determine if some packets are lost.
  */
 
+class UdpH264ServerHelper
+{
+public:
+  /**
+   * Create UdpH264ServerHelper which will make life easier for people trying
+   * to set up simulations with udp-client-server application.
+   *
+   */
+  UdpH264ServerHelper ();
+
+  /**
+   * Create UdpH264ServerHelper which will make life easier for people trying
+   * to set up simulations with udp-client-server application.
+   *
+   * \param port The port the server will wait on for incoming packets
+   */
+  UdpH264ServerHelper (uint16_t port);
+
+  /**
+   * Record an attribute to be set in each Application after it is is created.
+   *
+   * \param name the name of the attribute to set
+   * \param value the value of the attribute to set
+   */
+  void SetAttribute (std::string name, const AttributeValue &value);
+
+  /**
+   * Create one udp server application on each of the Nodes in the
+   * NodeContainer.
+   *
+   * \param c The nodes on which to create the Applications.  The nodes
+   *          are specified by a NodeContainer.
+   * \returns The applications created, one Application per Node in the
+   *          NodeContainer.
+   */
+  ApplicationContainer Install (NodeContainer c);
+  Ptr<UdpH264Server> GetServer (void);
+private:
+  ObjectFactory m_factory;
+  Ptr<UdpH264Server> m_server;
+};
 /**
  * \brief Create a client application which sends udp packets carrying
  *  a 32bit sequence number and a 64 bit time stamp.
@@ -95,4 +137,4 @@ private:
 
 } // namespace ns3
 
-#endif /* UDP_CLIENT_SERVER_H */
+#endif /* UDP_H264_CLIENT_SERVER_H */

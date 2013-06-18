@@ -19,8 +19,8 @@
  *                              <amine.ismail@udcast.com>
  */
 
-#ifndef UDP_TRACE_CLIENT_H
-#define UDP_TRACE_CLIENT_H
+#ifndef UDP_H264_TRACE_CLIENT_H
+#define UDP_H264_TRACE_CLIENT_H
 
 #include "ns3/application.h"
 #include "ns3/event-id.h"
@@ -88,7 +88,6 @@ public:
    * \brief set the trace file to be used by the application
    * \param filename a path to an MPEG4 trace file formatted as follows:
    *  Frame No Frametype   Time[ms]    Length [byte]
-   *  Frame No Frametype   Time[ms]    Length [byte]
    *  ...
    */
   void SetTraceFile (std::string filename);
@@ -138,4 +137,4 @@ private:
 
 } // namespace ns3
 
-#endif /* UDP_TRACE_CLIENT_H */
+#endif /* UDP_H264_TRACE_CLIENT_H */
