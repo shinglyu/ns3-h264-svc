@@ -161,7 +161,7 @@ UdpH264Server::HandleRead (Ptr<Socket> socket)
       if (packet->GetSize () > 0)
         {
           NS_LOG_INFO ("Got packet of size " <<  packet->GetSize () << " at " << Simulator::Now());
-          H264TraceHeader h264header;
+          H264TraceHeader *h264header;
           packet->RemoveHeader (h264header);
           //uint32_t currentSequenceNumber = seqTs.GetSeq ();
           /*
