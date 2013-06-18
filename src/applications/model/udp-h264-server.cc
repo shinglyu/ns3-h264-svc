@@ -160,9 +160,9 @@ UdpH264Server::HandleRead (Ptr<Socket> socket)
       if (packet->GetSize () > 0)
         {
           NS_LOG_INFO ("Got packet of size " <<  packet->GetSize () << " at " << Simulator::Now());
-       SeqTsHeader seqTs;
-          packet->RemoveHeader (seqTs);
-          uint32_t currentSequenceNumber = seqTs.GetSeq ();
+          H264TraceHeader h264header;
+          packet->RemoveHeader (h264header);
+          //uint32_t currentSequenceNumber = seqTs.GetSeq ();
           /*
           Input格式
              <Transmit Time>\t<Frame Size>\t<Lid>\t<Tid>\t<Qid>\t<Frame Number>
@@ -172,6 +172,7 @@ UdpH264Server::HandleRead (Ptr<Socket> socket)
           */
           if (InetSocketAddress::IsMatchingType (from))
             {
+              /*
               NS_LOG_INFO ("TraceDelay: RX " << packet->GetSize () <<
                            " bytes from "<< InetSocketAddress::ConvertFrom (from).GetIpv4 () <<
                            " Sequence Number: " << currentSequenceNumber <<
@@ -179,13 +180,18 @@ UdpH264Server::HandleRead (Ptr<Socket> socket)
                            " TXtime: " << seqTs.GetTs () <<
                            " RXtime: " << Simulator::Now () <<
                            " Delay: " << Simulator::Now () - seqTs.GetTs ());
+              */
               NS_LOG_INFO ("[VIDEO] " << Simulator::Now () << "\t" 
-                                      << packet->GetSize () << "\t"
-                                      << "The reset are NOT implementd yet" << "\t"
+                                      << h264header->GetSize () << "\t"
+                                      << h264header->GetLid() << "\t"
+                                      << h264header->GetTid() << "\t"
+                                      << h264header->GetQid() << "\t"
+                                      << h264header->GetFrameNo() << "\t"
                           );
             }
           else if (Inet6SocketAddress::IsMatchingType (from))
             {
+              /*
               NS_LOG_INFO ("TraceDelay: RX " << packet->GetSize () <<
                            " bytes from "<< Inet6SocketAddress::ConvertFrom (from).GetIpv6 () <<
                            " Sequence Number: " << currentSequenceNumber <<
@@ -193,6 +199,14 @@ UdpH264Server::HandleRead (Ptr<Socket> socket)
                            " TXtime: " << seqTs.GetTs () <<
                            " RXtime: " << Simulator::Now () <<
                            " Delay: " << Simulator::Now () - seqTs.GetTs ());
+              */
+              NS_LOG_INFO ("[VIDEO] " << Simulator::Now () << "\t" 
+                                      << h264header->GetSize () << "\t"
+                                      << h264header->GetLid() << "\t"
+                                      << h264header->GetTid() << "\t"
+                                      << h264header->GetQid() << "\t"
+                                      << h264header->GetFrameNo() << "\t"
+                          );
             }
 
           m_lossCounter.NotifyReceived (currentSequenceNumber);
