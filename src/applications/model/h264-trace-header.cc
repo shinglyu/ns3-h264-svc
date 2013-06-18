@@ -38,8 +38,8 @@ H264TraceHeader::H264TraceHeader ()
   NS_LOG_FUNCTION (this);
 }
 
-void
 /*
+void
 H264TraceHeader::SetTraceEntry(struct TraceEntry trace)
 {
   NS_LOG_FUNCTION (this );
