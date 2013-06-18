@@ -48,9 +48,9 @@ main (int argc, char *argv[])
 
   Address serverAddress;
 
-  //CommandLine cmd;
+  CommandLine cmd;
   //cmd.AddValue ("useIpv6", "Use Ipv6", useV6);
-  //cmd.Parse (argc, argv);
+  cmd.Parse (argc, argv);
 
 // create nodes
   NS_LOG_INFO ("Create nodes.");
@@ -64,7 +64,8 @@ main (int argc, char *argv[])
     NqosWifiMacHelper wifiMac = NqosWifiMacHelper::Default ();
     YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
     YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
-
+    wifiPhy.SetChannel (wifiChannel.Create ());
+    
     wifiMac.SetType ("ns3::AdhocWifiMac");
     wifi.SetRemoteStationManager (  "ns3::ConstantRateWifiManager",
                                     "DataMode", StringValue ("OfdmRate54Mbps"));
@@ -99,8 +100,8 @@ main (int argc, char *argv[])
   UdpH264ServerHelper server (port);
   //UdpServerHelper server (port);
   ApplicationContainer apps = server.Install (nodes.Get (1));
-  apps.Start (Seconds (1.0));
-  apps.Stop (Seconds (13.0));
+  apps.Start (Seconds (0.0));
+  apps.Stop (Seconds (12.0));
 
 
 // Create one UdpTraceClient application to send UDP datagrams from node zero to
@@ -110,8 +111,8 @@ main (int argc, char *argv[])
   //UdpH264TraceClientHelper client (serverAddress, port,"./ns3send.txt");
   client.SetAttribute ("MaxPacketSize", UintegerValue (MaxPacketSize));
   apps = client.Install (nodes.Get (0));
-  apps.Start (Seconds (2.0));
-  apps.Stop (Seconds (12.0));
+  apps.Start (Seconds (0.0));
+  apps.Stop (Seconds (11.0));
 
 // Now, do the actual simulation.
   NS_LOG_INFO ("Run Simulation.");
