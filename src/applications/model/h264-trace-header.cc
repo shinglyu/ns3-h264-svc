@@ -39,9 +39,10 @@ H264TraceHeader::H264TraceHeader ()
 }
 
 void
-H264TraceHeader::SetTraceEntry(struct TraceEntry* trace)
+/*
+H264TraceHeader::SetTraceEntry(struct TraceEntry trace)
 {
-  NS_LOG_FUNCTION (this << seq);
+  NS_LOG_FUNCTION (this );
   m_txTime  = trace->txTime;
   m_size    = trace->size;
   m_lid     = trace->lid;
@@ -49,6 +50,7 @@ H264TraceHeader::SetTraceEntry(struct TraceEntry* trace)
   m_qid     = trace->qid; 
   m_frameNo = trace->frameNo;
 }
+*/
 double
 H264TraceHeader::GetTxTime(void) const
 {
@@ -86,6 +88,43 @@ H264TraceHeader::GetFrameNo(void) const
   return m_frameNo;
 }
 
+void
+H264TraceHeader::SetTxTime(double txTime) const
+{
+  NS_LOG_FUNCTION (this);
+  m_txTime = txTime;
+}
+void
+H264TraceHeader::SetSize(uint16_t size) const
+{
+  NS_LOG_FUNCTION (this);
+  m_size = size;
+}
+void
+H264TraceHeader::SetLid(uint32_t lid) const
+{
+  NS_LOG_FUNCTION (this);
+  m_lid = lid;
+}
+
+void
+H264TraceHeader::SetTid(uint32_t tid) const
+{
+  NS_LOG_FUNCTION (this);
+  m_tid = tid;
+}
+void
+H264TraceHeader::SetQid(uint32_t qid) const
+{
+  NS_LOG_FUNCTION (this);
+  m_qid = qid;
+}
+void
+H264TraceHeader::SetFrameNo(uint32_t frameNo) const
+{
+  NS_LOG_FUNCTION (this);
+  m_frameNo = frameNo;
+}
 /*
 Time
 H264TraceHeader::GetTs (void) const

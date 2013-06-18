@@ -52,17 +52,23 @@ public:
   /**
    * \param seq the sequence number
    */
-  void SetTraceEntry (struct TraceEntry* trace);
+  //void SetTraceEntry (struct TraceEntry trace);
   /**
    * \return the sequence number
    */
-  TraceEntry GetTraceEntry (void) const;
+  //TraceEntry GetTraceEntry (void) const;
   double GetTxTime(void) const;
   uint16_t GetSize(void) const;
   uint32_t GetLid(void) const;
   uint32_t GetTid(void) const;
   uint32_t GetQid(void) const;
   uint32_t GetFrameNo(void) const;
+  double SetTxTime(double) const;
+  uint16_t SetSize(uint16_t) const;
+  uint32_t SetLid(uint32_t) const;
+  uint32_t SetTid(uint32_t) const;
+  uint32_t SetQid(uint32_t) const;
+  uint32_t SetFrameNo(uint32_t) const;
 
   static TypeId GetTypeId (void);
 private:

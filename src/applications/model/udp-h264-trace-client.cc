@@ -306,7 +306,13 @@ UdpH264TraceClient::SendPacket (uint32_t size)
   p = Create<Packet> (packetSize);//TODO: add payload here, or use header
   H264TraceHeader h264header;
   struct TraceEntry *entry = &m_entries[m_currentEntry];
-  h264header.SetTraceEntry(entry);
+  //h264header.SetTraceEntry(entry);
+  h264header.SetTxTime(entry->txTime);
+  h264header.SetSize(entry->size);
+  h264header.SetLid(entry->lid);
+  h264header.SetTid(entry->tid);
+  h264header.SetQid(entry->qid);
+  h264header.SetFrameNo(entry->frameNo);
   p->AddHeader (h264header);
 
   std::stringstream addressString;
