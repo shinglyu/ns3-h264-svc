@@ -39,15 +39,15 @@ H264TraceHeader::H264TraceHeader ()
 }
 
 void
-H264TraceHeader::SetTraceEntry(struct TraceEntry trace)
+H264TraceHeader::SetTraceEntry(struct TraceEntry* trace)
 {
   NS_LOG_FUNCTION (this << seq);
-  m_txTime  = trace.txTime;
-  m_size    = trace.size;
-  m_lid     = trace.lid;
-  m_tid     = trace.tid;
-  m_qid     = trace.qid; 
-  m_frameNo = trace.frameNo;
+  m_txTime  = trace->txTime;
+  m_size    = trace->size;
+  m_lid     = trace->lid;
+  m_tid     = trace->tid;
+  m_qid     = trace->qid; 
+  m_frameNo = trace->frameNo;
 }
 double
 H264TraceHeader::GetTxTime(void) const
