@@ -32,6 +32,7 @@ namespace ns3 {
  * The header is made of a 32bits sequence number followed by
  * a 64bits time stamp.
  */
+/*
 struct TraceEntry
 {
   double txTime;
@@ -41,6 +42,7 @@ struct TraceEntry
   uint32_t qid; 
   uint32_t frameNo;
 };
+*/
 
 class H264TraceHeader : public Header
 {
@@ -55,6 +57,12 @@ public:
    * \return the sequence number
    */
   TraceEntry GetTraceEntry (void) const;
+  double GetTxTime(void) const;
+  uint16_t GetSize(void) const;
+  uint32_t GetLid(void) const;
+  uint32_t GetTid(void) const;
+  uint32_t GetQid(void) const;
+  uint32_t GetFrameNo(void) const;
 
   static TypeId GetTypeId (void);
 private:
