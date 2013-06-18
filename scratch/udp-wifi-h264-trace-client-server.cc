@@ -48,9 +48,9 @@ main (int argc, char *argv[])
 
   Address serverAddress;
 
-  CommandLine cmd;
+  //CommandLine cmd;
   //cmd.AddValue ("useIpv6", "Use Ipv6", useV6);
-  cmd.Parse (argc, argv);
+  //cmd.Parse (argc, argv);
 
 // create nodes
   NS_LOG_INFO ("Create nodes.");
@@ -84,6 +84,9 @@ main (int argc, char *argv[])
 // We've got the "hardware" in place.  Now we need to add IP addresses.
   NS_LOG_INFO ("Assign IP Addresses.");
 
+  InternetStackHelper internet;
+  internet.Install (nodes);
+
   Ipv4AddressHelper ipv4;
   ipv4.SetBase ("10.1.1.0", "255.255.255.0");
   Ipv4InterfaceContainer interface = ipv4.Assign (devices);
@@ -97,7 +100,7 @@ main (int argc, char *argv[])
   //UdpServerHelper server (port);
   ApplicationContainer apps = server.Install (nodes.Get (1));
   apps.Start (Seconds (1.0));
-  apps.Stop (Seconds (11.0));
+  apps.Stop (Seconds (13.0));
 
 
 // Create one UdpTraceClient application to send UDP datagrams from node zero to
@@ -108,7 +111,7 @@ main (int argc, char *argv[])
   client.SetAttribute ("MaxPacketSize", UintegerValue (MaxPacketSize));
   apps = client.Install (nodes.Get (0));
   apps.Start (Seconds (2.0));
-  apps.Stop (Seconds (10.0));
+  apps.Stop (Seconds (12.0));
 
 // Now, do the actual simulation.
   NS_LOG_INFO ("Run Simulation.");
