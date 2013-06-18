@@ -31,7 +31,8 @@
 #include "ns3/uinteger.h"
 #include "packet-loss-counter.h"
 
-#include "seq-ts-header.h"
+//#include "seq-ts-header.h"
+#include "h264-trace-header.h"
 //#include "udp-server.h"
 #include "udp-h264-server.h"
 

@@ -29,7 +29,8 @@
 #include "ns3/packet.h"
 #include "ns3/uinteger.h"
 #include "ns3/string.h"
-#include "seq-ts-header.h"
+//#include "seq-ts-header.h"
+#include "h264-trace-header.h"
 //#include "udp-trace-client.h"
 #include "udp-h264-trace-client.h"
 #include <cstdlib>
