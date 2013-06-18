@@ -112,8 +112,8 @@ private:
   virtual void StopApplication (void);
   void ScheduleTransmit (Time dt);
   void Send (void);
-  //void SendPacket (uint32_t size);
-  void SendPacket (uint32_t size, struct TraceEntry* entry);
+  void SendPacket (uint32_t size);
+  //void SendPacket (uint32_t size, struct TraceEntry* entry);
 
 
   struct TraceEntry

@@ -161,7 +161,7 @@ UdpH264Server::HandleRead (Ptr<Socket> socket)
       if (packet->GetSize () > 0)
         {
           NS_LOG_INFO ("Got packet of size " <<  packet->GetSize () << " at " << Simulator::Now());
-          H264TraceHeader *h264header;
+          H264TraceHeader h264header;
           packet->RemoveHeader (h264header);
           //uint32_t currentSequenceNumber = seqTs.GetSeq ();
           /*
@@ -183,11 +183,11 @@ UdpH264Server::HandleRead (Ptr<Socket> socket)
                            " Delay: " << Simulator::Now () - seqTs.GetTs ());
               */
               NS_LOG_INFO ("[VIDEO] " << Simulator::Now () << "\t" 
-                                      << h264header->GetSize () << "\t"
-                                      << h264header->GetLid() << "\t"
-                                      << h264header->GetTid() << "\t"
-                                      << h264header->GetQid() << "\t"
-                                      << h264header->GetFrameNo() << "\t"
+                                      << h264header.GetSize () << "\t"
+                                      << h264header.GetLid() << "\t"
+                                      << h264header.GetTid() << "\t"
+                                      << h264header.GetQid() << "\t"
+                                      << h264header.GetFrameNo() << "\t"
                           );
             }
           else if (Inet6SocketAddress::IsMatchingType (from))
@@ -202,15 +202,15 @@ UdpH264Server::HandleRead (Ptr<Socket> socket)
                            " Delay: " << Simulator::Now () - seqTs.GetTs ());
               */
               NS_LOG_INFO ("[VIDEO] " << Simulator::Now () << "\t" 
-                                      << h264header->GetSize () << "\t"
-                                      << h264header->GetLid() << "\t"
-                                      << h264header->GetTid() << "\t"
-                                      << h264header->GetQid() << "\t"
-                                      << h264header->GetFrameNo() << "\t"
+                                      << h264header.GetSize () << "\t"
+                                      << h264header.GetLid() << "\t"
+                                      << h264header.GetTid() << "\t"
+                                      << h264header.GetQid() << "\t"
+                                      << h264header.GetFrameNo() << "\t"
                           );
             }
 
-          m_lossCounter.NotifyReceived (currentSequenceNumber);
+          //m_lossCounter.NotifyReceived (currentSequenceNumber);
           m_received++;
         }
     }

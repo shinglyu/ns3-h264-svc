@@ -290,7 +290,7 @@ UdpH264TraceClient::StopApplication ()
 }
 
 void
-UdpH264TraceClient::SendPacket (uint32_t size, struct TraceEntry* entry)
+UdpH264TraceClient::SendPacket (uint32_t size)
 {
   NS_LOG_FUNCTION (this << size);
   Ptr<Packet> p;
@@ -305,7 +305,8 @@ UdpH264TraceClient::SendPacket (uint32_t size, struct TraceEntry* entry)
     }
   p = Create<Packet> (packetSize);//TODO: add payload here, or use header
   H264TraceHeader h264header;
-  h264header.SetTraceEntry(entry)
+  struct TraceEntry *entry = &m_entries[m_currentEntry];
+  h264header.SetTraceEntry(entry);
   p->AddHeader (h264header);
 
   std::stringstream addressString;
@@ -347,11 +348,11 @@ UdpH264TraceClient::Send (void)
     {
       for (int i = 0; i < entry->size/ m_maxPacketSize; i++)
         {
-          SendPacket (m_maxPacketSize, entry);
+          SendPacket (m_maxPacketSize);
         }
 
       uint16_t sizetosend = entry->size% m_maxPacketSize;
-      SendPacket (sizetosend, entry);
+      SendPacket (sizetosend);
 
       m_currentEntry++;
       m_currentEntry %= m_entries.size ();
