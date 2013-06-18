@@ -86,8 +86,6 @@ public:
 
   /**
    * \brief set the trace file to be used by the application
-   * \param filename a path to an MPEG4 trace file formatted as follows:
-   *  Frame No Frametype   Time[ms]    Length [byte]
    *  Frame No Frametype   Time[ms]    Length [byte]
    *  ...
    */

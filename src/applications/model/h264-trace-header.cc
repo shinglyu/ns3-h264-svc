@@ -32,31 +32,68 @@ namespace ns3 {
 NS_OBJECT_ENSURE_REGISTERED (H264TraceHeader);
 
 H264TraceHeader::H264TraceHeader ()
-  : m_seq (0),
-    m_ts (Simulator::Now ().GetTimeStep ())
+  //: m_seq (0),
+    //m_ts (Simulator::Now ().GetTimeStep ())
 {
   NS_LOG_FUNCTION (this);
 }
 
 void
-H264TraceHeader::SetSeq (uint32_t seq)
+H264TraceHeader::SetTraceEntry(struct TraceEntry* trace)
 {
   NS_LOG_FUNCTION (this << seq);
-  m_seq = seq;
+  m_txTime  = trace->txTime;
+  m_size    = trace->size;
+  m_lid     = trace->lid;
+  m_tid     = trace->tid;
+  m_qid     = trace->qid; 
+  m_frameNo = trace->frameNo;
 }
-uint32_t
-H264TraceHeader::GetSeq (void) const
+double
+H264TraceHeader::GetTxTime(void) const
 {
   NS_LOG_FUNCTION (this);
-  return m_seq;
+  return m_txTime;
+}
+uint16_t
+H264TraceHeader::GetSize(void) const
+{
+  NS_LOG_FUNCTION (this);
+  return m_size;
+}
+uint32_t
+H264TraceHeader::GetLid(void) const
+{
+  NS_LOG_FUNCTION (this);
+  return m_lid;
+}
+uint32_t
+H264TraceHeader::GetTid(void) const
+{
+  NS_LOG_FUNCTION (this);
+  return m_tid;
+}
+uint32_t
+H264TraceHeader::GetQid(void) const
+{
+  NS_LOG_FUNCTION (this);
+  return m_qid;
+}
+uint32_t
+H264TraceHeader::GetFrameNo(void) const
+{
+  NS_LOG_FUNCTION (this);
+  return m_frameNo;
 }
 
+/*
 Time
 H264TraceHeader::GetTs (void) const
 {
   NS_LOG_FUNCTION (this);
   return TimeStep (m_ts);
 }
+*/
 
 TypeId
 H264TraceHeader::GetTypeId (void)
@@ -76,13 +113,13 @@ void
 H264TraceHeader::Print (std::ostream &os) const
 {
   NS_LOG_FUNCTION (this << &os);
-  os << "(seq=" << m_seq << " time=" << TimeStep (m_ts).GetSeconds () << ")";
+  //os << "(seq=" << m_seq << " time=" << TimeStep (m_ts).GetSeconds () << ")";
 }
 uint32_t
 H264TraceHeader::GetSerializedSize (void) const
 {
   NS_LOG_FUNCTION (this);
-  return 4+8;
+  return 8+2+4+4+4+4;
 }
 
 void
@@ -90,16 +127,24 @@ H264TraceHeader::Serialize (Buffer::Iterator start) const
 {
   NS_LOG_FUNCTION (this << &start);
   Buffer::Iterator i = start;
-  i.WriteHtonU32 (m_seq);
-  i.WriteHtonU64 (m_ts);
+  i.Write(m_txTime, 8);
+  i.WriteHtonU16 (m_size);
+  i.WriteHtonU32 (m_lid);
+  i.WriteHtonU32 (m_tid);
+  i.WriteHtonU32 (m_qid);
+  i.WriteHtonU32 (m_frameNo);
 }
 uint32_t
 H264TraceHeader::Deserialize (Buffer::Iterator start)
 {
   NS_LOG_FUNCTION (this << &start);
   Buffer::Iterator i = start;
-  m_seq = i.ReadNtohU32 ();
-  m_ts = i.ReadNtohU64 ();
+  m_txTime = i.Read(8);
+  m_size = i.ReadNtohU32 ();
+  m_lid = i.ReadNtohU32 ();
+  m_tid = i.ReadNtohU32 ();
+  m_qid = i.ReadNtohU32 (); 
+  m_frameNo = i.ReadNtohU32 ();
   return GetSerializedSize ();
 }
 

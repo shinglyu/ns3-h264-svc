@@ -32,16 +32,6 @@ namespace ns3 {
  * The header is made of a 32bits sequence number followed by
  * a 64bits time stamp.
  */
-struct TraceEntry
-{
-  double txTime;
-  uint16_t size;
-  uint32_t lid;
-  uint32_t tid;
-  uint32_t qid; 
-  uint32_t frameNo;
-};
-
 class H264TraceHeader : public Header
 {
 public:
@@ -50,11 +40,15 @@ public:
   /**
    * \param seq the sequence number
    */
-  void SetTraceEntry (struct TraceEntry* trace);
+  void SetSeq (uint32_t seq);
   /**
    * \return the sequence number
    */
-  TraceEntry GetTraceEntry (void) const;
+  uint32_t GetSeq (void) const;
+  /**
+   * \return the time stamp
+   */
+  Time GetTs (void) const;
 
   static TypeId GetTypeId (void);
 private:
@@ -64,12 +58,17 @@ private:
   virtual void Serialize (Buffer::Iterator start) const;
   virtual uint32_t Deserialize (Buffer::Iterator start);
 
-  double m_txTime;
-  uint16_t m_size;
-  uint32_t m_lid;
-  uint32_t m_tid;
-  uint32_t m_qid; 
-  uint32_t m_frameNo;
+  uint32_t m_seq;
+  uint64_t m_ts;
+  struct TraceEntry
+  {
+     double txTime;
+     uint16_t size;
+     uint32_t lid;
+     uint32_t tid;
+     uint32_t qid; 
+     uint32_t frameNo;
+  };
 };
 
 } // namespace ns3
