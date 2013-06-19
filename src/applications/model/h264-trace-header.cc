@@ -181,7 +181,7 @@ H264TraceHeader::Deserialize (Buffer::Iterator start)
   Buffer::Iterator i = start;
   //m_txTime = i.Read(8);
   m_txTime= i.ReadNtohU32 ();
-  m_size = i.ReadNtohU32 ();
+  m_size = i.ReadNtohU16 ();
   m_lid = i.ReadNtohU32 ();
   m_tid = i.ReadNtohU32 ();
   m_qid = i.ReadNtohU32 (); 

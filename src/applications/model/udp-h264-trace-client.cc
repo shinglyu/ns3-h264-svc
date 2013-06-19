@@ -153,7 +153,7 @@ UdpH264TraceClient::SetTraceFile (std::string traceFile)
   NS_LOG_FUNCTION (this << traceFile);
   if (traceFile == "")
     {
-      //NS_LOG_FUNCTION (this << "[ERROR] Trace file not specified.");
+      NS_LOG_FUNCTION (this << "[ERROR] Trace file not specified.");
       //LoadDefaultTrace ();
     }
   else
@@ -197,13 +197,14 @@ UdpH264TraceClient::LoadTrace (std::string filename)
   m_entries.clear ();
   if (!ifTraceFile.good ())
     {
-      //NS_LOG_FUNCTION (this << "[ERROR] Bad trace file: " << filename);
+      NS_LOG_INFO (this << "[ERROR] Bad trace file: " << filename);
       //LoadDefaultTrace ();
     }
+  NS_LOG_INFO ("Read Trace");
   while (ifTraceFile.good ())
     {
       ifTraceFile >> txTime >> size >> lid >> tid >> qid >> frameNo;
-      NS_LOG_INFO ("Read trace entry:" << txTime << size << lid << tid << qid << frameNo);
+      //NS_LOG_INFO ("Read trace entry:" << txTime << " " << size << " " << lid << " " << tid << " " << qid << " " << frameNo);
       /*
       Input格式
          <Transmit Time>\t<Frame Size>\t<Lid>\t<Tid>\t<Qid>\t<Frame Number>
@@ -298,7 +299,8 @@ UdpH264TraceClient::SendPacket (uint32_t size)
   uint32_t packetSize;
   if (size>12)
     {
-      packetSize = size - 12; // 12 is the size of the SeqTsHeader
+      //packetSize = size - 12; // 12 is the size of the SeqTsHeader
+      packetSize = size;
     }
   else
     {
@@ -309,7 +311,7 @@ UdpH264TraceClient::SendPacket (uint32_t size)
   struct TraceEntry *entry = &m_entries[m_currentEntry];
   //h264header.SetTraceEntry(entry);
   h264header.SetTxTime(entry->txTime);
-  h264header.SetSize(entry->size);
+  h264header.SetSize(size);
   h264header.SetLid(entry->lid);
   h264header.SetTid(entry->tid);
   h264header.SetQid(entry->qid);
@@ -333,7 +335,7 @@ UdpH264TraceClient::SendPacket (uint32_t size)
   if ((m_socket->Send (p)) >= 0)
     {
       ++m_sent;
-      NS_LOG_INFO ("Sent " << size << " bytes to "
+      NS_LOG_INFO ("Sent " << entry->frameNo << " frame segment to "
                            << addressString.str ());
     }
   else
